@@ -1,0 +1,12 @@
+# loan-service — production overrides
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_LOANS_HOST}:5432/banking_loans
+    username: ${DB_LOANS_USERNAME}
+    password: '{cipher}${DB_LOANS_PASSWORD_ENCRYPTED}'
+    hikari:
+      maximum-pool-size: 15
+
+banking:
+  jwt:
+    secret: '{cipher}${JWT_SECRET_ENCRYPTED}'
