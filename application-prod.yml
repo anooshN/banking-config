@@ -1,0 +1,42 @@
+# ============================================================
+# SHARED PRODUCTION OVERRIDES
+# ============================================================
+
+logging:
+  level:
+    root: WARN
+    com.banking: INFO
+    # Never log SQL in production
+    org.hibernate.SQL: OFF
+
+management:
+  endpoint:
+    health:
+      show-details: when-authorized
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_SERVER_URL:http://discovery-server.banking.svc.cluster.local:8761/eureka/}
+
+spring:
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+    properties:
+      schema.registry.url: ${SCHEMA_REGISTRY_URL}
+      security.protocol: SSL
+      ssl.truststore.location: /etc/kafka/ssl/kafka.truststore.jks
+      ssl.truststore.password: ${KAFKA_SSL_TRUSTSTORE_PASSWORD}
+
+banking:
+  cors:
+    allowed-origins:
+      - https://app.bankingapp.com
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 20
+        failureRateThreshold: 40
+        waitDurationInOpenState: 30s
