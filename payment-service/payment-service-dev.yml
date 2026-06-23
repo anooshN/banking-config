@@ -1,0 +1,16 @@
+# payment-service — dev overrides
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5435/banking_payments
+    username: banking
+    password: banking-secret
+    hikari:
+      maximum-pool-size: 5
+  kafka:
+    bootstrap-servers: localhost:9092
+    properties:
+      schema.registry.url: http://localhost:8085
+
+banking:
+  jwt:
+    secret: dev-secret-key-that-is-at-least-32-characters-long
