@@ -1,0 +1,21 @@
+# report-service — dev overrides
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/banking_reports
+    username: banking
+    password: banking-secret
+    hikari:
+      maximum-pool-size: 5
+
+banking:
+  jwt:
+    secret: dev-secret-key-that-is-at-least-32-characters-long
+  report:
+    s3:
+      bucket: banking-statements-dev
+      endpoint: http://localhost:9000  # LocalStack for local S3 testing
+
+aws:
+  region: us-east-1
+  access-key-id: test
+  secret-access-key: test
