@@ -1,0 +1,25 @@
+# notification-service — production overrides
+spring:
+  data:
+    mongodb:
+      uri: '{cipher}${MONGO_URI_ENCRYPTED}'
+  mail:
+    host: ${SMTP_HOST}
+    port: 587
+    username: ${SMTP_USERNAME}
+    password: '{cipher}${SMTP_PASSWORD_ENCRYPTED}'
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+      mail.smtp.ssl.trust: ${SMTP_HOST}
+
+banking:
+  jwt:
+    secret: '{cipher}${JWT_SECRET_ENCRYPTED}'
+  notification:
+    email:
+      enabled: true
+    sms:
+      enabled: true
+    push:
+      enabled: true
