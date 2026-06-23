@@ -1,0 +1,16 @@
+# fraud-detection-service — production overrides
+spring:
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: 6379
+      password: '{cipher}${REDIS_PASSWORD_ENCRYPTED}'
+      ssl.enabled: true
+
+banking:
+  jwt:
+    secret: '{cipher}${JWT_SECRET_ENCRYPTED}'
+  fraud:
+    rules:
+      high-value-threshold: 10000.00
+      velocity-max-transactions-per-hour: 20
