@@ -1,0 +1,12 @@
+# card-service — production overrides
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_CARDS_HOST}:5432/banking_cards
+    username: ${DB_CARDS_USERNAME}
+    password: '{cipher}${DB_CARDS_PASSWORD_ENCRYPTED}'
+    hikari:
+      maximum-pool-size: 15
+
+banking:
+  jwt:
+    secret: '{cipher}${JWT_SECRET_ENCRYPTED}'
