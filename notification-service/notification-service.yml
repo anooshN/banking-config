@@ -1,0 +1,30 @@
+# notification-service — base config
+server:
+  port: 8086
+
+spring:
+  application:
+    name: notification-service
+  data:
+    mongodb:
+      database: banking_notifications
+      auto-index-creation: true
+  kafka:
+    consumer:
+      group-id: notification-service-group
+
+banking:
+  notification:
+    email:
+      from: noreply@bankingapp.com
+      reply-to: support@bankingapp.com
+    sms:
+      provider: twilio
+      from-number: ${TWILIO_FROM_NUMBER:+15555555555}
+    push:
+      provider: firebase
+    templates:
+      transaction-alert: "Your account {accountNumber} was {type} {amount} {currency}"
+      login-alert: "New login from {device} at {location}"
+      payment-sent: "Payment of {amount} sent to {receiver}"
+      fraud-alert: "Suspicious activity detected on your account"
