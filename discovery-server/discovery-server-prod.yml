@@ -1,0 +1,16 @@
+# discovery-server — production overrides
+spring:
+  security:
+    user:
+      name: '{cipher}${EUREKA_USERNAME_ENCRYPTED}'
+      password: '{cipher}${EUREKA_PASSWORD_ENCRYPTED}'
+
+eureka:
+  instance:
+    hostname: discovery-server.banking.svc.cluster.local
+  client:
+    service-url:
+      defaultZone: http://discovery-server.banking.svc.cluster.local:8761/eureka/
+  server:
+    enable-self-preservation: true   # back on in prod
+    renewal-percent-threshold: 0.85
