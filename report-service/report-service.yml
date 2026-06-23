@@ -1,0 +1,38 @@
+# report-service — base config
+server:
+  port: 8088
+
+spring:
+  application:
+    name: report-service
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  batch:
+    jdbc:
+      initialize-schema: always
+    job:
+      enabled: false  # don't auto-run jobs on startup
+
+banking:
+  report:
+    statement:
+      max-transactions: 10000
+      chunk-size: 100
+      formats:
+        - PDF
+        - CSV
+        - EXCEL
+    schedule:
+      monthly-statements: "0 0 1 1 * *"   # 1am on 1st of every month
+      quarterly-reports: "0 0 2 1 1,4,7,10 *"
+    s3:
+      prefix: statements/
+      expiry-hours: 24  # presigned URL expiry
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
