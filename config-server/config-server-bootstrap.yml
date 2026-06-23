@@ -1,0 +1,39 @@
+# This is the config-server's OWN bootstrap config
+# (not served to other services — used by config-server itself at startup)
+# In Spring Boot 2.4+, use spring.config.import instead of bootstrap.yml
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/anooshN/banking-config
+          default-label: main
+          search-paths: '{application}'
+          clone-on-start: true
+          force-pull: true
+          timeout: 10
+          refresh-rate: 30
+          username: ${CONFIG_GIT_USERNAME:}
+          password: ${CONFIG_GIT_PASSWORD:}
+        encrypt:
+          enabled: true
+  security:
+    user:
+      name: ${CONFIG_SERVER_USERNAME:config}
+      password: ${CONFIG_SERVER_PASSWORD:config-secret}
+
+encrypt:
+  key: ${ENCRYPT_KEY:local-dev-encryption-key-32-chars!}
+
+server:
+  port: 8888
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka:eureka-secret@localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
