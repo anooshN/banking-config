@@ -1,0 +1,20 @@
+# api-gateway — production overrides
+spring:
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: 6379
+      password: '{cipher}${REDIS_PASSWORD_ENCRYPTED}'
+      ssl.enabled: true
+
+banking:
+  jwt:
+    secret: '{cipher}${JWT_SECRET_ENCRYPTED}'
+  cors:
+    allowed-origins:
+      - https://app.bankingapp.com
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_SERVER_URL}
