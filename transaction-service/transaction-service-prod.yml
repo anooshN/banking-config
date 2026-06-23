@@ -1,0 +1,14 @@
+# transaction-service — production overrides
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_TRANSACTIONS_HOST}:5432/banking_transactions
+    username: ${DB_TRANSACTIONS_USERNAME}
+    password: '{cipher}${DB_TRANSACTIONS_PASSWORD_ENCRYPTED}'
+    hikari:
+      maximum-pool-size: 30
+      minimum-idle: 10
+      connection-timeout: 20000
+
+banking:
+  jwt:
+    secret: '{cipher}${JWT_SECRET_ENCRYPTED}'
