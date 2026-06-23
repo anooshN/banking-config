@@ -1,0 +1,43 @@
+# user-service — base config
+server:
+  port: 8082
+
+spring:
+  application:
+    name: user-service
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  kafka:
+    consumer:
+      group-id: user-service-group
+
+banking:
+  kyc:
+    allowed-document-types:
+      - PASSPORT
+      - DRIVING_LICENSE
+      - NATIONAL_ID
+      - VOTER_ID
+    verification-timeout-days: 7
+  user:
+    profile-picture-max-size-mb: 5
+    allowed-currencies:
+      - USD
+      - EUR
+      - GBP
+      - JPY
+      - CAD
+      - AUD
+      - CHF
+      - INR
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
