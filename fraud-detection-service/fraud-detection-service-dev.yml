@@ -1,0 +1,17 @@
+# fraud-detection-service — dev overrides
+spring:
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  kafka:
+    bootstrap-servers: localhost:9092
+    properties:
+      schema.registry.url: http://localhost:8085
+
+banking:
+  jwt:
+    secret: dev-secret-key-that-is-at-least-32-characters-long
+  fraud:
+    rules:
+      high-value-threshold: 50000.00  # higher threshold in dev to avoid false alerts
