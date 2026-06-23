@@ -1,0 +1,14 @@
+# audit-service — production overrides
+spring:
+  data:
+    cassandra:
+      contact-points: ${CASSANDRA_HOSTS}
+      port: 9042
+      username: ${CASSANDRA_USERNAME}
+      password: '{cipher}${CASSANDRA_PASSWORD_ENCRYPTED}'
+      ssl.enabled: true
+      local-datacenter: ${CASSANDRA_DATACENTER:us-east-1}
+
+banking:
+  jwt:
+    secret: '{cipher}${JWT_SECRET_ENCRYPTED}'
