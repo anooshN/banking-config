@@ -1,0 +1,33 @@
+# fraud-detection-service — base config
+server:
+  port: 8089
+
+spring:
+  application:
+    name: fraud-detection-service
+  kafka:
+    consumer:
+      group-id: fraud-detection-group
+
+banking:
+  fraud:
+    rules:
+      high-value-threshold: 10000.00
+      velocity-max-transactions-per-hour: 20
+      velocity-window-hours: 1
+      new-ip-score-weight: 0.10
+      high-value-score-weight: 0.30
+      high-velocity-score-weight: 0.50
+    risk-levels:
+      low-max: 0.29
+      medium-max: 0.49
+      high-max: 0.79
+      # above 0.79 = CRITICAL
+    actions:
+      medium: LOG_AND_FLAG
+      high: ALERT_AND_FLAG
+      critical: BLOCK_AND_ALERT
+    redis:
+      velocity-key-ttl-hours: 1
+      ip-key-ttl-days: 30
+      known-device-ttl-days: 90
