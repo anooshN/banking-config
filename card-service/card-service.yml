@@ -1,0 +1,35 @@
+# card-service — base config
+server:
+  port: 8090
+
+spring:
+  application:
+    name: card-service
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  kafka:
+    consumer:
+      group-id: card-service-group
+
+banking:
+  card:
+    default-daily-limit: 5000.00
+    default-monthly-limit: 50000.00
+    expiry-years: 3
+    issuer-bin: "411111"  # Bank Identification Number prefix
+    supported-types:
+      - DEBIT
+      - CREDIT
+      - VIRTUAL
+    virtual-card-max-per-account: 5
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
