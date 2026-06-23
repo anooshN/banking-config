@@ -1,0 +1,4 @@
+# discovery-server — dev overrides
+eureka:
+  server:
+    enable-self-preservation: false  # off in dev so services deregister quickly
