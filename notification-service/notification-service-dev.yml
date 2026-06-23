@@ -1,0 +1,28 @@
+# notification-service — dev overrides
+spring:
+  data:
+    mongodb:
+      uri: mongodb://banking:banking-secret@localhost:27017/banking_notifications?authSource=admin
+  mail:
+    host: localhost
+    port: 1025          # MailHog for local email testing
+    username: ""
+    password: ""
+    properties:
+      mail.smtp.auth: false
+      mail.smtp.starttls.enable: false
+  kafka:
+    bootstrap-servers: localhost:9092
+    properties:
+      schema.registry.url: http://localhost:8085
+
+banking:
+  jwt:
+    secret: dev-secret-key-that-is-at-least-32-characters-long
+  notification:
+    email:
+      enabled: true
+    sms:
+      enabled: false    # don't send real SMS in dev
+    push:
+      enabled: false
