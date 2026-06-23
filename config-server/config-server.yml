@@ -1,0 +1,19 @@
+# config-server — base config
+# Note: config-server reads its OWN config from bootstrap.yml (not from this repo)
+# This file is here for reference / documentation purposes only
+
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus,refresh,busrefresh
+  endpoint:
+    health:
+      show-details: always
