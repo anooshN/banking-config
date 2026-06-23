@@ -1,0 +1,13 @@
+# user-service — production overrides
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_USERS_HOST}:5432/banking_users
+    username: ${DB_USERS_USERNAME}
+    password: '{cipher}${DB_USERS_PASSWORD_ENCRYPTED}'
+    hikari:
+      maximum-pool-size: 15
+      minimum-idle: 3
+
+banking:
+  jwt:
+    secret: '{cipher}${JWT_SECRET_ENCRYPTED}'
