@@ -1,0 +1,31 @@
+# audit-service — base config
+server:
+  port: 8087
+
+spring:
+  application:
+    name: audit-service
+  data:
+    cassandra:
+      keyspace-name: banking_audit
+      local-datacenter: datacenter1
+      schema-action: CREATE_IF_NOT_EXISTS
+      request:
+        timeout: 10s
+      connection:
+        connect-timeout: 10s
+        init-query-timeout: 10s
+  kafka:
+    consumer:
+      group-id: audit-service-group
+      auto-offset-reset: earliest
+
+banking:
+  audit:
+    retention-days: 2555  # 7 years (regulatory requirement)
+    topics:
+      - banking.audit.events
+      - banking.transaction.events
+      - banking.payment.events
+      - banking.user.events
+      - banking.account.events
