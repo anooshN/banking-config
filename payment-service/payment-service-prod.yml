@@ -1,0 +1,13 @@
+# payment-service — production overrides
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_PAYMENTS_HOST}:5432/banking_payments
+    username: ${DB_PAYMENTS_USERNAME}
+    password: '{cipher}${DB_PAYMENTS_PASSWORD_ENCRYPTED}'
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+
+banking:
+  jwt:
+    secret: '{cipher}${JWT_SECRET_ENCRYPTED}'
