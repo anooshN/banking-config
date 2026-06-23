@@ -1,0 +1,39 @@
+# transaction-service — base config
+server:
+  port: 8084
+
+spring:
+  application:
+    name: transaction-service
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc.batch_size: 100
+        order_inserts: true
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  kafka:
+    consumer:
+      group-id: transaction-service-group
+
+banking:
+  transaction:
+    max-debit-amount: 1000000.00
+    max-credit-amount: 1000000.00
+    daily-transfer-limit: 50000.00
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      account-service:
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
